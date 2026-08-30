@@ -1,0 +1,34 @@
+# Jobbernaut User Stories
+
+- As a user, I want to click "Login with LinkedIn", so that I can access my dashboard without a separate email and password
+- As a user, I want to be able to view all the jobs that I applied to in one single place
+- As a user, I want to be able to search for the positions, titles, companies I applied to
+- As a user, I want to be able to filter my jobs by date or application status
+- As a user, I want to be able to add a job to my tracker:
+  - Job ID (Randomized Unique Identifier for this Job) 
+  - Job Title
+  - Company Name
+  - Date Applied (Defaults to Today)
+  - Location
+  - Status of the application (Applied/Rejected/HR Screening/Phone Screen/Technical, etc.)
+  - Link of the job posted
+  - Link of the place where I can track my application
+  - Job Description
+  - Salary Range
+  - Whether I have been referred to this job/Key contacts related to this job
+    - If referred, then by who? Their contact details
+      - Type of Key Contact 
+      - Name
+      - Email
+      - Phone Number
+  - Next Action Date for this job (Follow up with recruiter on Friday/Tech Interview on Tuesday)
+    - Type of Action
+    - Date of Action 
+  - The resume I have used to apply for this job
+  - The cover letter I have used to apply for this job
+  - Additional attachments that I have used to apply for this job
+  - Any additional notes or quirks that I should be aware of about this job 
+- As a user I want to be able to edit and view and download the jobs that I have
+- As a user I want to be able to delete any jobs that I added to this dashboard
+- As a user I want to be able to omit/archive certain jobs from appearing in my search/filter main dashboard to prevent clutter and to keep focus on my current jobs
+- As a user I want to see a dashboard with dozens of graphs and useful glow-up metrics like average jobs applied to per week, number of interviews, number of phone screens, etc to help me navigate my job search better
