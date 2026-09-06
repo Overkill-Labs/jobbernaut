@@ -52,7 +52,7 @@ export default function JobContacts({ data, onChange }) {
               <select
                 value={contact.type}
                 onChange={(e) => update(contact.id, "type", e.target.value)}
-                className="text-xs bg-white border border-[var(--border)] rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
+                className="text-xs bg-[var(--code-bg)] text-[var(--text-h)] border border-[var(--border)] rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
               >
                 {CONTACT_TYPES.map((t) => (
                   <option key={t} value={t}>

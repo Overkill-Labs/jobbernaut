@@ -58,7 +58,7 @@ export default function JobAttachments({ data, onChange }) {
               <select
                 value={att.type}
                 onChange={(e) => update(att.id, "type", e.target.value)}
-                className="text-xs bg-white border border-[var(--border)] rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
+                className="text-xs bg-[var(--code-bg)] text-[var(--text-h)] border border-[var(--border)] rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
               >
                 {ATTACHMENT_TYPES.map((t) => (
                   <option key={t} value={t}>

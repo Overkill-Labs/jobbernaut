@@ -71,7 +71,7 @@ export default function JobActions({ data, onChange }) {
               <select
                 value={action.type}
                 onChange={(e) => update(action.id, "type", e.target.value)}
-                className="text-xs bg-white border border-[var(--border)] rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
+                className="text-xs bg-[var(--code-bg)] text-[var(--text-h)] border border-[var(--border)] rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
               >
                 {ACTION_TYPES.map((t) => (
                   <option key={t} value={t}>

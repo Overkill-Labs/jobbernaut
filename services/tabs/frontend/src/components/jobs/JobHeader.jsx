@@ -10,12 +10,12 @@ const STATUS_OPTIONS = [
 ];
 
 const STATUS_STYLES = {
-  applied: "bg-blue-100 text-blue-800",
-  screening: "bg-purple-100 text-purple-800",
-  interviewing: "bg-amber-100 text-amber-800",
-  offer: "bg-green-100 text-green-800",
-  rejected: "bg-red-100 text-red-700",
-  archived: "bg-gray-100 text-gray-600",
+  applied: "bg-blue-900/60 text-blue-300",
+  screening: "bg-purple-900/60 text-purple-300",
+  interviewing: "bg-amber-900/60 text-amber-300",
+  offer: "bg-green-900/60 text-green-300",
+  rejected: "bg-red-900/60 text-red-300",
+  archived: "bg-gray-700/60 text-gray-400",
 };
 
 /**

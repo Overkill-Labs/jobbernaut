@@ -34,7 +34,7 @@ export default function Dialog({ isOpen, onClose, children }) {
       />
 
       {/* Panel */}
-      <div className="relative z-10 w-full max-w-3xl max-h-[90vh] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+      <div className="relative z-10 w-full max-w-3xl max-h-[90vh] bg-[var(--surface)] rounded-2xl shadow-2xl flex flex-col overflow-hidden">
         {children}
       </div>
     </div>,
