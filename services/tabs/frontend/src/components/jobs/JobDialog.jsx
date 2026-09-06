@@ -12,46 +12,48 @@ import JobNotes from "./JobNotes";
 /**
  * Props:
  *   job      — job object (or null when closed)
+ *   isNew    — true when this job hasn't been committed to the list yet
  *   onClose  — () => void
- *   onSave   — (updatedJob: object) => void  — called on every field change
+ *   onSave   — (job: object) => void   — upserts job into the list
+ *   onDelete — (jobId: string) => void — removes job from the list
  */
-export default function JobDialog({ job, onClose, onSave }) {
+export default function JobDialog({
+  job,
+  isNew = false,
+  onClose,
+  onSave,
+  onDelete,
+}) {
   const [draft, setDraft] = useState(job);
 
-  // Keep draft in sync if a different job is opened
-  // (parent controls open/close via job === null)
+  // Sync draft when a different job is opened
   if (job !== null && draft?.id !== job.id) {
     setDraft(job);
   }
 
-  const patchField = (field, value) => {
-    const updated = { ...draft, [field]: value };
+  // For NEW jobs: patch functions only update local draft (don't commit to list yet).
+  // For EXISTING jobs: every patch immediately auto-saves (original inline-edit behaviour).
+  const patch = (updater) => {
+    const updated = updater(draft);
     setDraft(updated);
-    onSave(updated);
+    if (!isNew) onSave(updated);
   };
 
-  const patchSalary = (newSalary) => {
-    const updated = { ...draft, salary_range: newSalary };
-    setDraft(updated);
-    onSave(updated);
+  const patchField = (field, value) => patch((d) => ({ ...d, [field]: value }));
+  const patchSalary = (newSalary) =>
+    patch((d) => ({ ...d, salary_range: newSalary }));
+  const patchContacts = (v) => patch((d) => ({ ...d, key_contacts: v }));
+  const patchActions = (v) => patch((d) => ({ ...d, key_actions: v }));
+  const patchAttachments = (v) => patch((d) => ({ ...d, attachments: v }));
+
+  const handleSave = () => {
+    onSave(draft);
+    onClose();
   };
 
-  const patchContacts = (newContacts) => {
-    const updated = { ...draft, key_contacts: newContacts };
-    setDraft(updated);
-    onSave(updated);
-  };
-
-  const patchActions = (newActions) => {
-    const updated = { ...draft, key_actions: newActions };
-    setDraft(updated);
-    onSave(updated);
-  };
-
-  const patchAttachments = (newAttachments) => {
-    const updated = { ...draft, attachments: newAttachments };
-    setDraft(updated);
-    onSave(updated);
+  const handleDelete = () => {
+    onDelete(draft.id);
+    onClose();
   };
 
   return (
@@ -90,6 +92,42 @@ export default function JobDialog({ job, onClose, onSave }) {
             <JobAttachments data={draft} onChange={patchAttachments} />
             <div className="h-px bg-[var(--border)]" />
             <JobNotes data={draft} onChange={patchField} />
+          </div>
+
+          {/* Footer */}
+          <div className="h-px bg-[var(--border)]" />
+          <div className="px-6 py-4 flex items-center justify-between gap-3">
+            {isNew ? (
+              <>
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="text-sm text-[var(--text)] hover:text-[var(--text-h)] transition-colors"
+                >
+                  Discard
+                </button>
+                <button
+                  type="button"
+                  onClick={handleSave}
+                  className="text-sm font-semibold px-5 py-2 rounded-lg bg-[var(--accent)] text-white hover:opacity-90 active:opacity-80 transition-opacity"
+                >
+                  Save Job
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  onClick={handleDelete}
+                  className="text-sm font-medium px-4 py-2 rounded-lg text-red-400 hover:bg-red-900/30 transition-colors"
+                >
+                  Delete Job
+                </button>
+                <span className="text-xs text-[var(--text)] italic">
+                  Changes saved automatically
+                </span>
+              </>
+            )}
           </div>
         </>
       )}

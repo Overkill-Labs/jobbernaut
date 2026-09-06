@@ -32,6 +32,7 @@ const createEmptyJob = () => ({
 export default function JobsPage() {
   const [jobs, setJobs] = useState(seedJobs);
   const [activeJob, setActiveJob] = useState(null);
+  const [isNewJob, setIsNewJob] = useState(false);
 
   const handleSave = (updatedJob) => {
     setJobs((prev) => {
@@ -42,10 +43,18 @@ export default function JobsPage() {
     });
   };
 
+  const handleDelete = (jobId) => {
+    setJobs((prev) => prev.filter((j) => j.id !== jobId));
+  };
+
   const handleAddJob = () => {
-    const newJob = createEmptyJob();
-    setJobs((prev) => [newJob, ...prev]);
-    setActiveJob(newJob);
+    setActiveJob(createEmptyJob());
+    setIsNewJob(true);
+  };
+
+  const handleClose = () => {
+    setActiveJob(null);
+    setIsNewJob(false);
   };
 
   return (
@@ -121,8 +130,10 @@ export default function JobsPage() {
 
       <JobDialog
         job={activeJob}
-        onClose={() => setActiveJob(null)}
+        isNew={isNewJob}
+        onClose={handleClose}
         onSave={handleSave}
+        onDelete={handleDelete}
       />
     </div>
   );
